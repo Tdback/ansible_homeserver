@@ -1,4 +1,6 @@
 ---
+# These tasks require the use of escalated privileges, which are stored using
+# ansible-vault under the `../host_vars/[hostname]/secret.yaml'
 - name: Install essential packages
   become: true
   package:

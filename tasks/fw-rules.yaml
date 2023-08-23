@@ -1,6 +1,6 @@
 ---
 # These tasks require the use of escalated privileges, which are stored using
-# ansible-vault under the `./host_vars/[hostname]/secret.yaml'
+# ansible-vault under the `../host_vars/[hostname]/secret.yaml'
 - name : Ensure UFW is installed
   become: true
   ansible.builtin.apt:
