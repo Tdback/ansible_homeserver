@@ -1,0 +1,84 @@
+---
+# These tasks require the use of escalated privileges, which are stored using
+# ansible-vault under the `./host_vars/[hostname]/secret.yaml'
+- name : Ensure UFW is installed
+  become: true
+  ansible.builtin.apt:
+    name: ufw
+    state: present
+
+- name: By default deny everything and enable UFW
+  become: true
+  community.general.ufw:
+    state: enabled
+    policy: deny
+
+- name: Set logging
+  become: true
+  community.general.ufw:
+    logging: 'on'
+
+- name: Allow all access to tcp port 80
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '80'
+    proto: tcp
+
+- name: Allow all access to tcp port 443
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '443'
+    proto: tcp
+
+- name: Limit all access to tcp port 22 (for ssh-tarpit)
+  become: true
+  community.general.ufw:
+    rule: limit
+    port: '22'
+    proto: tcp
+
+- name: Allow all access to tcp port 53 (for pi.hole DNS)
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '53'
+    proto: tcp
+
+- name: Allow all access to udp port 53 (for pi.hole DNS)
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '53'
+    proto: udp
+
+- name: Allow all access to udp port 67 (for pi.hole DHCP)
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '67'
+    proto: udp
+
+- name: Allow access to my specific workstation to tcp port 2222
+  become: true
+  community.general.ufw:
+    rule: allow
+    src: "{{ workstation_ip }}"
+    port: '2222'
+    proto: tcp
+
+- name: Allow all access to tcp port 25565 (for MC server)
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '25565'
+    proto: tcp
+
+- name: Allow all access to udp port 25565 (for MC server)
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '25565'
+    proto: udp
+

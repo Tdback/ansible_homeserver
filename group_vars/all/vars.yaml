@@ -1,0 +1,18 @@
+---
+server_name: bigbrother.box
+
+# My workstation's IP, used for enabling SSH access
+workstation_ip: 192.168.1.220
+
+packages:
+  - curl
+  - wget
+  - nala
+  - vim
+  - net-tools
+  - docker
+  - docker-compose
+  - openjdk-17-jdk-headless
+  - lib32gcc-s1                # |
+  - software-properties-common # | Don't quite remember what I needed these for...
+  - libvorbisfile3             # |

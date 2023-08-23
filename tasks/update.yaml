@@ -1,0 +1,15 @@
+---
+# These tasks require the use of escalated privileges, which are stored using
+# ansible-vault under the `./host_vars/[hostname]/secret.yaml'
+- name: Update package repository (equivalent to "apt-get upgrade")
+  become: true
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Update all packages to their latest version
+  become: true
+  ansible.builtin.apt:
+    name: "*"
+    state: latest
+  notify: "restart server"
+

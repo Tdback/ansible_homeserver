@@ -1,0 +1,5 @@
+---
+- name: Rebooting server
+  ansible.builtin.reboot:
+  notify: "start mc server"
+  listen: "restart server"

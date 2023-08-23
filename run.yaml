@@ -1,0 +1,17 @@
+---
+- name: Configuring the system
+  hosts: bigbrother
+
+  tasks:
+    - import_tasks: ./tasks/update.yaml
+
+    - import_tasks: ./tasks/essential.yaml
+
+    - name: Flush reboot handler
+      meta: flush_handlers
+
+    - import_tasks: ./tasks/fw-rules.yaml
+
+  handlers:
+    - import_tasks: ./handlers/reboot.yaml
+    - import_tasks: ./handlers/start-mc-server.yaml

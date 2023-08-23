@@ -1,0 +1,30 @@
+---
+- name: Install essential packages
+  become: true
+  package:
+    name: "{{ packages }}"
+    state: latest
+
+- name: Disable SSH password auth
+  become: true
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^#PasswordAuthentication yes"
+    line: "PasswordAuthentication no"
+  register: sshd_config
+
+- name: Disable SSH empty password auth
+  become: true
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^#PermitEmptyPasswords no"
+    line: "PermitEmptyPasswords no"
+  register: sshd_config
+
+- name: Restart SSH daemon
+  become: true
+  service:
+    name: sshd
+    state: restarted
+  when: sshd_config.changed
+
