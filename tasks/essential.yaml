@@ -2,13 +2,11 @@
 # These tasks require the use of escalated privileges, which are stored using
 # ansible-vault under the `../host_vars/[hostname]/secret.yaml'
 - name: Install essential packages
-  become: true
   package:
     name: "{{ packages }}"
     state: latest
 
 - name: Disable SSH password auth
-  become: true
   lineinfile:
     dest: /etc/ssh/sshd_config
     regexp: "^#PasswordAuthentication yes"
@@ -16,7 +14,6 @@
   register: sshd_config
 
 - name: Disable SSH empty password auth
-  become: true
   lineinfile:
     dest: /etc/ssh/sshd_config
     regexp: "^#PermitEmptyPasswords no"
@@ -24,7 +21,6 @@
   register: sshd_config
 
 - name: Restart SSH daemon
-  become: true
   service:
     name: sshd
     state: restarted
