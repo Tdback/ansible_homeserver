@@ -1,4 +1,7 @@
 ---
+# Needed to specify MC server directory
+username: tdback
+
 server_name: bigbrother.box
 
 # My workstation's IP, used for enabling SSH access

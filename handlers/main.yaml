@@ -8,5 +8,5 @@
   ansible.builtin.shell:
     cmd: nohup ./start_server.sh &
     args:
-      chdir: minecraft_server
+      chdir: "/home/{{ username }}/minecraft_server"
   listen: "start mc server"
