@@ -13,5 +13,4 @@
     - import_tasks: ./tasks/fw-rules.yaml
 
   handlers:
-    - import_tasks: ./handlers/reboot.yaml
-    - import_tasks: ./handlers/start-mc-server.yaml
+    - import_tasks: ./handlers/main.yaml
