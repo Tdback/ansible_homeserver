@@ -5,5 +5,5 @@ bigbrother:
       ansible_port: 2222
       ansible_ssh_private_key_file: ~/.ssh/homeserver
       ansible_become_pass: "{{ root_pass }}"
-      ansible_user: tdback
-      ansible_host: bigbrother.box
+      ansible_user: "{{ username }}"
+      ansible_host: "{{ server_name }}"
